@@ -1,0 +1,7 @@
+Vishal|101|
+English:90|Total:575 Percentage:95.83%
+Hindi:91|Total:575 Percentage:95.83%
+Math:99|Total:575 Percentage:95.83%
+Science:98|Total:575 Percentage:95.83%
+Political:99|Total:575 Percentage:95.83%
+History:98|Total:575 Percentage:95.83%
