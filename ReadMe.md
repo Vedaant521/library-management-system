@@ -12,7 +12,13 @@ A simple Python project to manage book details and records using OOP (Object-Ori
 
 4) Delete a book
 
-5) Data stored permanently in a text file (Library.txt)
+5) Issue a book to a student (records issue date & student name)
+
+6) Return a book (updates return date in issue record)
+
+7) Data stored permanently in text files (library2.txt & Issue_book.txt)
+
+8) Data stored permanently in a text file (Library.txt)
 
 🧠 Concepts Used
 
