@@ -1,1 +1,3 @@
 Python|Akash|230
+C|Sushil geol|240
+C++|Sushil geol|270

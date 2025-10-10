@@ -1,3 +1,9 @@
+import datetime
+import os
+if not os.path.exists("library2.txt"):
+    open("library2.txt","w").close()
+if not os.path.exists("Issue_book.txt"):
+    open("Issue_book.txt","w").close()
 class Book:
     def __init__(self,author,title,price):
         self.title = title
@@ -70,6 +76,48 @@ class Library(Book):
             print("Book deleted successfully..>>>")
         else:
             print("Invalid book")
+    def issue_book(self):
+        print("//Library issue management..>>>")
+        student_name = input("Enter student name:")
+        title = input("Enter title of book to issue:")
+        found = False
+        with open("library2.txt","r")as f:
+            for line in f:
+                data = line.strip().split("|")
+                if(data[0].lower() == title.lower()):
+                    found = True
+                    break
+        if not found:
+            print("Book not found in library..")
+            return
+        
+        issue_date = datetime.date.today().strftime("%d-%m-%Y")
+        with open("Issue_book.txt","a")as f:
+            f.write(f"{title}|{student_name}|{issue_date}|Not Returned\n")
+        print(f"Book {title} issued to {student_name} on {issue_date}")
+
+    def return_book(self):
+        print("//Library Management>>>")
+        title = input("Enter book title you want to return:")
+        student_name = input("Enter student name:")
+        found = False
+        update_lines = []
+        with open("Issue_book.txt","r")as f:
+            lines = f.readlines()
+            for line in lines:
+                data = line.strip().split("|")
+                if(len(data)>=4 and data[0].lower()==title.lower() and data[1].lower()==student_name.lower() and "Not Returned" in data[3]):
+                    found = True
+                    return_date = datetime.date.today().strftime("%d-%m-%Y")
+                    update_lines.append(f"{data[0]}|{data[1]}|{data[2]}|Returned on {return_date}\n")
+                else:
+                    update_lines.append(line)
+        if found:
+            with open("Issue_book.txt","w")as f:
+                f.writelines(update_lines)
+            print("Book returned successfully...>>>")
+        else:
+            print("No record found for this issue...!")
 
 l = Library("","","")
 while True:
@@ -79,11 +127,12 @@ while True:
     print("Enter 2 for view book:")
     print("Enter 3 for update book:")
     print("Enter 4 for delete book:")
-    print("Enter 5 for exit:")
+    print("Enter 5 for issue book:")
+    print("Enter 6 for return book:")
+    print("Enter 7 for exit:")
     choice = int(input("Enter your choice:"))
     if(choice == 1):
         l.add_book()
-        l.show()
     elif(choice == 2):
         l.view_book()
     elif(choice == 3):
@@ -91,6 +140,10 @@ while True:
     elif(choice == 4):
         l.delete_book()
     elif(choice == 5):
+        l.issue_book()
+    elif(choice == 6):
+        l.return_book()
+    elif(choice == 7):
         break
     else:
         print("Invalid choice")
